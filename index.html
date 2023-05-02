@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Upload</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('images/background2.jpeg'); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2 {
+            color: #ffffff;
+        }
+
+        #container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="file"] {
+            margin-bottom: 10px;
+        }
+
+        .file-info {
+        display: flex;
+        align-items: center;
+        }
+
+        .vote-button {
+            margin-left: 10px;
+        }
+
+        .comment-form {
+            display: flex;
+            margin-top: 10px;
+        }
+
+        .comment-form input {
+            flex-grow: 1;
+            margin-right: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .comment-form button {
+        background-color: #2ecc71;
+        font-size: 14px;
+        padding: 5px 10px;
+        }
+
+        .comment-form button:hover {
+            background-color: #27ae60;
+        }
+
+        .comments-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        .comments-list li {
+            background-color: #f8f8f8;
+            padding: 5px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        #uploaded-files {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #uploaded-files li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #f2f2f2;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Upload your music</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="music" accept="audio/*">
+            <button type="submit">Upload</button>
+        </form>
+        <section id="leaderboard">
+            <h2>Leaderboard</h2>
+            <ul id="uploaded-files"></ul>
+        </section>
+
+
+    <script>
+        const uploadedFilesElement = document.getElementById('uploaded-files');
+    
+        async function fetchLeaderboard() {
+            try {
+                const response = await fetch('/leaderboard');
+                const files = await response.json();
+                displayLeaderboard(files);
+            } catch (error) {
+                console.error('Error fetching leaderboard:', error);
+            }
+        }
+    
+        function displayLeaderboard(files) {
+            uploadedFilesElement.innerHTML = '';
+
+            // Sort files by votes
+            files.sort((a, b) => b.votes - a.votes);
+
+            for (const file of files) {
+                const listItem = document.createElement('li');
+
+                // Add a container for music name and vote button
+                const fileInfo = document.createElement('div');
+                fileInfo.className = 'file-info';
+                fileInfo.textContent = `${file.originalName} (${file.name}) - Votes: ${file.votes}`;
+                listItem.appendChild(fileInfo);
+
+                // Add vote button
+                const voteButton = document.createElement('button');
+                voteButton.className = 'vote-button';
+                voteButton.textContent = 'Vote';
+                voteButton.onclick = () => vote(file.name);
+                fileInfo.appendChild(voteButton);
+
+                // Add audio player
+                const audioPlayer = document.createElement('audio');
+                audioPlayer.controls = true;
+                audioPlayer.src = `/uploads/${file.name}`;
+                listItem.appendChild(audioPlayer);
+                
+                // Add a form for submitting comments
+                const commentForm = document.createElement('form');
+                commentForm.className = 'comment-form';
+                commentForm.innerHTML = `
+                    <input type="text" name="comment" placeholder="Add a comment...">
+                    <button type="submit">Submit</button>
+                `;
+                commentForm.onsubmit = (e) => {
+                    e.preventDefault();
+                    const commentInput = commentForm.querySelector('input[name="comment"]');
+                    addComment(file.name, commentInput.value);
+                    commentInput.value = '';
+                };
+                listItem.appendChild(commentForm);
+
+                // Add a list for displaying comments
+                const commentsList = document.createElement('ul');
+                commentsList.className = 'comments-list';
+                listItem.appendChild(commentsList);
+
+                // Display existing comments
+                displayComments(file.name, commentsList);
+
+                uploadedFilesElement.appendChild(listItem);
+            }
+        }
+
+    
+        async function vote(fileName) {
+            try {
+                const response = await fetch(`/vote/${fileName}`, { method: 'POST' });
+    
+                if (response.ok) {
+                    fetchLeaderboard();
+                } else {
+                    console.error('Error voting for file:', fileName);
+                }
+            } catch (error) {
+                console.error('Error voting for file:', fileName, error);
+            }
+        }
+
+    async function displayComments(fileName, commentsList) {
+        try {
+            const response = await fetch(`/comments/${fileName}`);
+            const comments = await response.json();
+
+            commentsList.innerHTML = '';
+
+            for (const comment of comments) {
+                const commentItem = document.createElement('li');
+                commentItem.textContent = comment;
+                commentsList.appendChild(commentItem);
+            }
+        } catch (error) {
+            console.error('Error fetching comments:', error);
+        }
+    }
+
+    async function addComment(fileName, comment) {
+        try {
+            const response = await fetch(`/comments/${fileName}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ comment })
+            });
+
+            if (response.ok) {
+                fetchLeaderboard();
+            } else {
+                console.error('Error adding comment for file:', fileName);
+            }
+        } catch (error) {
+            console.error('Error adding comment for file:', fileName, error);
+        }
+    }
+        fetchLeaderboard();
+    </script>
+</body>
+</html>
