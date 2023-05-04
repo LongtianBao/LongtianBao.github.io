@@ -36,9 +36,23 @@
             margin-bottom: 10px;
         }
 
+        li {
+        padding: 10px;
+        background-color: #f8f8f8;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        }
+
+        .file-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
         .file-info {
-        display: flex;
-        align-items: center;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .vote-button {
@@ -69,13 +83,13 @@
         }
 
         .comments-list {
-            list-style-type: none;
-            padding: 0;
-            margin-top: 10px;
+        list-style-type: none;
+        padding: 0;
+        margin-top: 10px;
         }
 
         .comments-list li {
-            background-color: #f8f8f8;
+            background-color: #fff;
             padding: 5px;
             border-radius: 4px;
             margin-bottom: 5px;
@@ -146,6 +160,11 @@
 
             for (const file of files) {
                 const listItem = document.createElement('li');
+                
+                // Add a container for file components
+                const fileContainer = document.createElement('div');
+                fileContainer.className = 'file-container';
+                listItem.appendChild(fileContainer);
 
                 // Add a container for music name and vote button
                 const fileInfo = document.createElement('div');
