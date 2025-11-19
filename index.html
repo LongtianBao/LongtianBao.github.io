@@ -3,267 +3,609 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Upload</title>
+    <title>Longtian Bao | CS Researcher & Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --text: #1f2937;
+            --text-light: #4b5563;
+            --text-lighter: #9ca3af;
+            --bg: #f3f4f6;
+            --bg-card: #ffffff;
+            --border: #e5e7eb;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-image: url('images/background2.jpeg'); /* Replace with your image path */
-            background-size: cover;
-            background-position: center;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
             margin: 0;
-            padding: 0;
+            line-height: 1.6;
+            scroll-behavior: smooth;
         }
 
-        h1, h2 {
-            color: #ffffff;
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 0;
         }
 
-        #container {
-            max-width: 800px;
+        .nav-container {
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        form {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        input[type="file"] {
-            margin-bottom: 10px;
-        }
-
-        li {
-        padding: 10px;
-        background-color: #f8f8f8;
-        border-radius: 4px;
-        margin-bottom: 10px;
-        }
-
-        .file-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .file-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .vote-button {
-            margin-left: 10px;
-        }
-
-        .comment-form {
-            display: flex;
-            margin-top: 10px;
-        }
-
-        .comment-form input {
-            flex-grow: 1;
-            margin-right: 10px;
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .comment-form button {
-        background-color: #2ecc71;
-        font-size: 14px;
-        padding: 5px 10px;
-        }
-
-        .comment-form button:hover {
-            background-color: #27ae60;
-        }
-
-        .comments-list {
-        list-style-type: none;
-        padding: 0;
-        margin-top: 10px;
-        }
-
-        .comments-list li {
-            background-color: #fff;
-            padding: 5px;
-            border-radius: 4px;
-            margin-bottom: 5px;
-        }
-
-        button {
-            background-color: #3498db;
-            color: white;
-            font-size: 16px;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            border-radius: 4px;
-            margin-bottom: 20px;
-        }
-
-        button:hover {
-            background-color: #2980b9;
-        }
-
-        #uploaded-files {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        #uploaded-files li {
-            display: flex;
-            align-items: center;
             justify-content: space-between;
-            background-color: #f2f2f2;
-            padding: 10px;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Main Layout */
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--text);
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        #about {
+            padding-top: 8rem;
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin: 0 0 1rem 0;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero-text {
+            max-width: 700px;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1.25rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--border);
+            color: var(--text);
+            background: white;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--text-light);
+            background: #f9fafb;
+        }
+
+        /* Publications */
+        .publication-item {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+        
+        .publication-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .pub-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .pub-authors {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .pub-venue {
+            font-style: italic;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.025em;
+            text-transform: uppercase;
+            margin-right: 0.5rem;
+        }
+
+        .tag-highlight {
+            background-color: #fef3c7;
+            color: #d97706;
+        }
+
+        .pub-links a {
+            font-size: 0.9rem;
+            color: var(--primary);
+            text-decoration: none;
+            margin-right: 1rem;
+            font-weight: 500;
+        }
+
+        .pub-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Experience Timeline */
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            padding-bottom: 3rem;
+            border-left: 2px solid var(--border);
+        }
+
+        .timeline-item:last-child {
+            border-left: 2px solid transparent;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: -0.4rem;
+            top: 0.25rem;
+            width: 0.8rem;
+            height: 0.8rem;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 2px solid white;
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .exp-role {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .exp-org {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .exp-date {
+            color: var(--text-lighter);
+            font-size: 0.9rem;
+            font-family: monospace;
+        }
+
+        .exp-details ul {
+            margin: 0.5rem 0 0 0;
+            padding-left: 1.2rem;
+            color: var(--text-light);
+        }
+
+        .exp-details li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1rem;
+        }
+
+        .project-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        .project-tech {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-pill {
+            font-size: 0.75rem;
+            background: #f3f4f6;
+            padding: 0.25rem 0.75rem;
             border-radius: 4px;
-            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        /* Skills */
+        .skills-category {
+            margin-bottom: 2rem;
+        }
+
+        .skills-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-lighter);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-item {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 2rem;
+            text-align: center;
+            color: var(--text-lighter);
+            font-size: 0.9rem;
+            background: white;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero-name { font-size: 2.5rem; }
+            .nav-links { display: none; } /* Simple hide for now */
+            section { padding: 3rem 0; }
+            .exp-header { flex-direction: column; }
         }
     </style>
 </head>
 <body>
-    <div id="container">
-        <h1>Upload your music</h1>
-        <form action="/upload" method="POST" enctype="multipart/form-data">
-            <input type="file" name="music" accept="audio/*">
-            <button type="submit">Upload</button>
-        </form>
-        <section id="leaderboard">
-            <h2>Leaderboard</h2>
-            <ul id="uploaded-files"></ul>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-logo">LB</a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#publications">Publications</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero / About -->
+        <section id="about">
+            <h1 class="hero-name">Longtian Bao</h1>
+            <div class="hero-subtitle">M.S. Student in Computer Science at UC San Diego</div>
+            
+            <div class="hero-text">
+                <p>
+                    I am a graduate student researcher at the Laboratory for Emerging Intelligence, advised by Prof. Leon Bergen and Prof. Ramamohan Paturi. 
+                    My work bridges <strong>Natural Language Processing</strong> and <strong>Machine Learning Systems</strong>, with a focus on long-context understanding, information retrieval, and efficient state-space models like Mamba-2.
+                </p>
+                <p>
+                    Previously, I completed my B.S. in Computer Engineering at UCSD. I have experience building full-stack educational platforms and autonomous robotic systems.
+                </p>
+            </div>
+
+            <div class="social-links">
+                <a href="mailto:lobao@ucsd.edu" class="btn btn-primary">Contact Me</a>
+                <a href="https://github.com/LongtianBao" target="_blank" class="btn btn-outline">GitHub</a>
+                <a href="https://scholar.google.com/citations?user=xX-1jwkAAAAJ&hl=en" target="_blank" class="btn btn-outline">Google Scholar</a>
+            </div>
         </section>
 
+        <!-- Publications -->
+        <section id="publications">
+            <h2>Selected Publications</h2>
+            
+            <div class="publication-item">
+                <div class="pub-title">Single-Pass Document Scanning for Question Answering</div>
+                <div class="pub-authors">Weili Cao*, Jianyou Wang, Youze Zheng*, <strong>Longtian Bao*</strong>, Qirui Zheng, Taylor Berg-Kirkpatrick, Ramamohan Paturi, Leon Bergen</div>
+                <div class="pub-venue">Conference on Language Modeling (COLM), 2025 <span class="tag tag-highlight">Oral Spotlight, Top 2%</span></div>
+                <div class="pub-links">
+                    <a href="https://hargenzheng.com" target="_blank">Paper</a>
+                    <a href="https://github.com/hgnzheng" target="_blank">Code</a>
+                </div>
+            </div>
+
+            <div class="publication-item">
+                <div class="pub-title">Measuring Risk of Bias in Biomedical Reports: The RoBBR Benchmark</div>
+                <div class="pub-authors">Jianyou Wang*, Weili Cao*, <strong>Longtian Bao</strong>, Youze Zheng, Gil Pasternak, Kaicheng Wang, Xiaoyue Wang, Ramamohan Paturi, Leon Bergen</div>
+                <div class="pub-venue">Empirical Methods in Natural Language Processing (EMNLP), 2025</div>
+                <div class="pub-links">
+                    <a href="https://hargenzheng.com" target="_blank">Paper</a>
+                    <a href="https://github.com/hgnzheng" target="_blank">Code</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience">
+            <h2>Experience</h2>
+            
+            <!-- Research -->
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="exp-header">
+                    <div>
+                        <div class="exp-role">Research Assistant</div>
+                        <div class="exp-org">Laboratory for Emerging Intelligence, UCSD</div>
+                    </div>
+                    <div class="exp-date">Apr 2024 – Present</div>
+                </div>
+                <div class="exp-details">
+                    <ul>
+                        <li>Re-architected a Mamba-2 State-Space Model for subquadratic efficient sentence retrieval on 256k+ token documents.</li>
+                        <li>Designed link-based synthetic data generation pipelines using LLMs to capture long-range dependencies.</li>
+                        <li>Developed the RoBBR benchmark for assessing risk-of-bias in biomedical research from expert judgments.</li>
+                        <li>Engineered human-validated annotation pipelines using GPT-4 for fine-grained retrieval evaluation.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Teaching -->
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="exp-header">
+                    <div>
+                        <div class="exp-role">Instructional Apprentice (Tutor)</div>
+                        <div class="exp-org">UC San Diego</div>
+                    </div>
+                    <div class="exp-date">2021 – 2024</div>
+                </div>
+                <div class="exp-details">
+                    <ul>
+                        <li><strong>Data Structures (CSE 12):</strong> Spring 21, Winter 23, Winter 24</li>
+                        <li><strong>Accel. Intro to Programming (CSE 11):</strong> Winter 22, Fall 22, Spring 23</li>
+                        <li><strong>Computer Organization (CSE 30):</strong> Fall 23</li>
+                        <li><strong>Software Tools (CSE 15L):</strong> Spring 21</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>UCSD Autograder</h3>
+                        <span class="exp-date">2023-2024</span>
+                    </div>
+                    <div class="project-desc">
+                        Engineered a full-stack educational platform used by over 1,000 students. Developed containerized autograders and real-time ticket queues for office hours.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-pill">Full Stack</span>
+                        <span class="tech-pill">Docker</span>
+                        <span class="tech-pill">Database</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Autonomous AI Racer</h3>
+                        <span class="exp-date">Win 2024</span>
+                    </div>
+                    <div class="project-desc">
+                        Built a 1/10 scale autonomous vehicle with Jetson Nano, LIDAR, and OAK-D. Trained behavioral cloning models using TensorFlow to navigate racetracks.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-pill">Robotics</span>
+                        <span class="tech-pill">Computer Vision</span>
+                        <span class="tech-pill">TensorFlow</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>DaCe Reproducibility</h3>
+                        <span class="exp-date">Fall 2022</span>
+                    </div>
+                    <div class="project-desc">
+                        Evaluated the DaCe high-performance framework on NPBench using AMD hardware. Ported and debugged NumPy benchmarks to analyze performance portability.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-pill">HPC</span>
+                        <span class="tech-pill">Python</span>
+                        <span class="tech-pill">Benchmarking</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills">
+            <h2>Skills</h2>
+            
+            <div class="skills-category">
+                <div class="skills-title">Languages & Core</div>
+                <div class="skills-list">
+                    <span class="skill-item">Python (Advanced)</span>
+                    <span class="skill-item">C/C++</span>
+                    <span class="skill-item">Java</span>
+                    <span class="skill-item">TypeScript</span>
+                    <span class="skill-item">Bash</span>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <div class="skills-title">Machine Learning & AI</div>
+                <div class="skills-list">
+                    <span class="skill-item">PyTorch</span>
+                    <span class="skill-item">TensorFlow</span>
+                    <span class="skill-item">Transformers</span>
+                    <span class="skill-item">Mamba-2 SSMs</span>
+                    <span class="skill-item">Long-context QA</span>
+                    <span class="skill-item">OpenCV</span>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <div class="skills-title">Systems & DevOps</div>
+                <div class="skills-list">
+                    <span class="skill-item">Docker</span>
+                    <span class="skill-item">AWS (EC2/S3)</span>
+                    <span class="skill-item">Linux</span>
+                    <span class="skill-item">Git</span>
+                    <span class="skill-item">PostgreSQL</span>
+                    <span class="skill-item">Distributed Training</span>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <div class="skills-title">Tools & Hardware</div>
+                <div class="skills-list">
+                    <span class="skill-item">LLM APIs</span>
+                    <span class="skill-item">Weights & Biases</span>
+                    <span class="skill-item">NVIDIA Jetson</span>
+                    <span class="skill-item">LIDAR</span>
+                    <span class="skill-item">React</span>
+                    <span class="skill-item">Flask/FastAPI</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Longtian Bao. Built with semantic web technologies.</p>
+    </footer>
 
     <script>
-        const uploadedFilesElement = document.getElementById('uploaded-files');
-    
-        async function fetchLeaderboard() {
-            try {
-                const response = await fetch('/leaderboard');
-                const files = await response.json();
-                displayLeaderboard(files);
-            } catch (error) {
-                console.error('Error fetching leaderboard:', error);
-            }
-        }
-    
-        function displayLeaderboard(files) {
-            uploadedFilesElement.innerHTML = '';
-
-            // Sort files by votes
-            files.sort((a, b) => b.votes - a.votes);
-
-            for (const file of files) {
-                const listItem = document.createElement('li');
-                
-                // Add a container for file components
-                const fileContainer = document.createElement('div');
-                fileContainer.className = 'file-container';
-                listItem.appendChild(fileContainer);
-
-                // Add a container for music name and vote button
-                const fileInfo = document.createElement('div');
-                fileInfo.className = 'file-info';
-                fileInfo.textContent = `${file.originalName} (${file.name}) - Votes: ${file.votes}`;
-                listItem.appendChild(fileInfo);
-
-                // Add vote button
-                const voteButton = document.createElement('button');
-                voteButton.className = 'vote-button';
-                voteButton.textContent = 'Vote';
-                voteButton.onclick = () => vote(file.name);
-                fileInfo.appendChild(voteButton);
-
-                // Add audio player
-                const audioPlayer = document.createElement('audio');
-                audioPlayer.controls = true;
-                audioPlayer.src = `/uploads/${file.name}`;
-                listItem.appendChild(audioPlayer);
-                
-                // Add a form for submitting comments
-                const commentForm = document.createElement('form');
-                commentForm.className = 'comment-form';
-                commentForm.innerHTML = `
-                    <input type="text" name="comment" placeholder="Add a comment...">
-                    <button type="submit">Submit</button>
-                `;
-                commentForm.onsubmit = (e) => {
-                    e.preventDefault();
-                    const commentInput = commentForm.querySelector('input[name="comment"]');
-                    addComment(file.name, commentInput.value);
-                    commentInput.value = '';
-                };
-                listItem.appendChild(commentForm);
-
-                // Add a list for displaying comments
-                const commentsList = document.createElement('ul');
-                commentsList.className = 'comments-list';
-                listItem.appendChild(commentsList);
-
-                // Display existing comments
-                displayComments(file.name, commentsList);
-
-                uploadedFilesElement.appendChild(listItem);
-            }
-        }
-
-    
-        async function vote(fileName) {
-            try {
-                const response = await fetch(`/vote/${fileName}`, { method: 'POST' });
-    
-                if (response.ok) {
-                    fetchLeaderboard();
-                } else {
-                    console.error('Error voting for file:', fileName);
-                }
-            } catch (error) {
-                console.error('Error voting for file:', fileName, error);
-            }
-        }
-
-    async function displayComments(fileName, commentsList) {
-        try {
-            const response = await fetch(`/comments/${fileName}`);
-            const comments = await response.json();
-
-            commentsList.innerHTML = '';
-
-            for (const comment of comments) {
-                const commentItem = document.createElement('li');
-                commentItem.textContent = comment;
-                commentsList.appendChild(commentItem);
-            }
-        } catch (error) {
-            console.error('Error fetching comments:', error);
-        }
-    }
-
-    async function addComment(fileName, comment) {
-        try {
-            const response = await fetch(`/comments/${fileName}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ comment })
-            });
-
-            if (response.ok) {
-                fetchLeaderboard();
-            } else {
-                console.error('Error adding comment for file:', fileName);
-            }
-        } catch (error) {
-            console.error('Error adding comment for file:', fileName, error);
-        }
-    }
-        fetchLeaderboard();
+        document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
