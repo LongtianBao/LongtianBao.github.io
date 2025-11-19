@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Longtian Bao | CS Researcher & Engineer at UCSD specializing in NLP, Machine Learning, and efficient state-space models like Mamba-2.">
     <title>Longtian Bao | CS Researcher & Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +14,8 @@
             --primary-dark: #1d4ed8;
             --text: #1f2937;
             --text-light: #4b5563;
-            --text-lighter: #9ca3af;
+            /* Improved contrast from #9ca3af to #6b7280 */
+            --text-lighter: #6b7280;
             --bg: #f3f4f6;
             --bg-card: #ffffff;
             --border: #e5e7eb;
@@ -77,6 +79,21 @@
             color: var(--primary);
         }
 
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            color: var(--text);
+        }
+
+        .mobile-menu-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
         /* Main Layout */
         main {
             max-width: 1000px;
@@ -115,6 +132,31 @@
             justify-content: center;
         }
 
+        .hero-content-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .hero-text-content {
+            flex: 1;
+        }
+
+        .hero-image-container {
+            flex: 0 0 280px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image {
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
         .hero-name {
             font-family: 'Playfair Display', serif;
             font-size: 3.5rem;
@@ -130,7 +172,6 @@
         }
 
         .hero-text {
-            max-width: 700px;
             font-size: 1.1rem;
             color: var(--text-light);
             margin-bottom: 2.5rem;
@@ -379,12 +420,74 @@
             border-top: 1px solid var(--border);
         }
 
-        /* Mobile */
+        /* Mobile & Responsive */
         @media (max-width: 768px) {
-            .hero-name { font-size: 2.5rem; }
-            .nav-links { display: none; } /* Simple hide for now */
-            section { padding: 3rem 0; }
-            .exp-header { flex-direction: column; }
+            .nav-container {
+                padding: 0 1.5rem;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem 0;
+                gap: 0;
+                border-bottom: 1px solid var(--border);
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 1rem 2rem;
+                display: block;
+                width: 100%;
+            }
+
+            .nav-links a:hover {
+                background-color: var(--bg);
+            }
+
+            .hero-content-wrapper {
+                flex-direction: column-reverse;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .hero-name {
+                font-size: 2.5rem;
+            }
+            
+            .hero-image-container {
+                flex: 0 0 auto;
+            }
+
+            .hero-image {
+                width: 200px;
+                height: 200px;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+
+            .exp-header {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -393,6 +496,11 @@
     <nav>
         <div class="nav-container">
             <a href="#" class="nav-logo">LB</a>
+            <button class="mobile-menu-btn" aria-label="Toggle navigation">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
             <div class="nav-links">
                 <a href="#about">About</a>
                 <a href="#publications">Publications</a>
@@ -406,23 +514,31 @@
     <main>
         <!-- Hero / About -->
         <section id="about">
-            <h1 class="hero-name">Longtian Bao</h1>
-            <div class="hero-subtitle">M.S. Student in Computer Science at UC San Diego</div>
-            
-            <div class="hero-text">
-                <p>
-                    I am a graduate student researcher at the Laboratory for Emerging Intelligence, advised by Prof. Leon Bergen and Prof. Ramamohan Paturi. 
-                    My work bridges <strong>Natural Language Processing</strong> and <strong>Machine Learning</strong>, with a focus on long-context understanding, information retrieval, and efficient state-space models like Mamba-2.
-                </p>
-                <p>
-                    Previously, I completed my B.S. in Computer Engineering at UCSD. I have experience building full-stack educational platforms and autonomous robotic systems.
-                </p>
-            </div>
-
-            <div class="social-links">
-                <a href="mailto:lobao@ucsd.edu" class="btn btn-primary">Contact Me</a>
-                <a href="https://github.com/LongtianBao" target="_blank" class="btn btn-outline">GitHub</a>
-                <a href="https://scholar.google.com/citations?user=xX-1jwkAAAAJ&hl=en" target="_blank" class="btn btn-outline">Google Scholar</a>
+            <div class="hero-content-wrapper">
+                <div class="hero-text-content">
+                    <h1 class="hero-name">Longtian Bao</h1>
+                    <div class="hero-subtitle">M.S. Student in Computer Science at UC San Diego</div>
+                    
+                    <div class="hero-text">
+                        <p>
+                            I am a graduate student researcher at the Laboratory for Emerging Intelligence, advised by Prof. Leon Bergen and Prof. Ramamohan Paturi. 
+                            My work bridges <strong>Natural Language Processing</strong> and <strong>Machine Learning</strong>, with a focus on long-context understanding, information retrieval, and efficient state-space models like Mamba-2.
+                        </p>
+                        <p>
+                            Previously, I completed my B.S. in Computer Engineering at UCSD. I have experience building full-stack educational platforms and autonomous robotic systems.
+                        </p>
+                    </div>
+        
+                    <div class="social-links">
+                        <a href="mailto:lobao@ucsd.edu" class="btn btn-primary">Contact Me</a>
+                        <a href="https://github.com/LongtianBao" target="_blank" class="btn btn-outline">GitHub</a>
+                        <a href="https://scholar.google.com/citations?user=xX-1jwkAAAAJ&hl=en" target="_blank" class="btn btn-outline">Google Scholar</a>
+                    </div>
+                </div>
+                <div class="hero-image-container">
+                    <!-- Please save your image as images/profile.jpg -->
+                    <img src="images/image.png" alt="Longtian Bao" class="hero-image" onerror="this.style.display='none'">
+                </div>
             </div>
         </section>
 
@@ -610,6 +726,23 @@
 
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile menu toggle
+        const mobileBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (mobileBtn) {
+            mobileBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+            
+            // Close menu when clicking a link
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
     </script>
 </body>
 </html>
