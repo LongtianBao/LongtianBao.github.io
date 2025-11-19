@@ -462,15 +462,20 @@
                     <div>
                         <div class="exp-role">Research Assistant</div>
                         <div class="exp-org">Laboratory for Emerging Intelligence, UCSD</div>
+                        <div style="font-size: 0.9rem; color: var(--text-light); margin-top: 0.25rem;">
+                            Advisors: Prof. Leon Bergen and Prof. Ramamohan Paturi
+                        </div>
                     </div>
                     <div class="exp-date">Apr 2024 – Present</div>
                 </div>
                 <div class="exp-details">
                     <ul>
-                        <li>Re-architected a Mamba-2 State-Space Model for subquadratic efficient sentence retrieval on 256k+ token documents.</li>
-                        <li>Designed link-based synthetic data generation pipelines using LLMs to capture long-range dependencies.</li>
-                        <li>Developed the RoBBR benchmark for assessing risk-of-bias in biomedical research from expert judgments.</li>
-                        <li>Engineered human-validated annotation pipelines using GPT-4 for fine-grained retrieval evaluation.</li>
+                        <li>Re-architected a Mamba-2 State-Space Model (SSM) by replacing its language modeling head with a classification head, creating a subquadratic model that preserves global context for efficient sentence retrieval in documents as long as 256k tokens.</li>
+                        <li>Designed and implemented a novel link-based synthetic data generation pipeline where an LLM identifies and leverages natural, long-range dependencies within documents to create coherent training examples for long-context question answering.</li>
+                        <li>Developed an LLM-assisted annotation-validation pipeline to construct a new information retrieval benchmark from 41 existing QA datasets, enabling a fine-grained evaluation of model performance in retrieving relevant sentences from long documents.</li>
+                        <li>Developed the RoBBR benchmark, a new resource for assessing risk-of-bias in biomedical research, derived from expert judgments on over 500 scientific studies to evaluate LLM capabilities in analyzing methodological strength.</li>
+                        <li>Designed two novel subtasks—Support Sentence Retrieval (SSR) and Support Judgment Selection (SJS)—to disentangle and independently measure the information retrieval and reasoning abilities of language models in the complex domain of bias assessment.</li>
+                        <li>Engineered an automatic, human-validated annotation pipeline using GPT-4 to create the ground truth for the retrieval task by decomposing expert judgments into fine-grained "aspects" and mapping them precisely to source sentences in biomedical papers.</li>
                     </ul>
                 </div>
             </div>
