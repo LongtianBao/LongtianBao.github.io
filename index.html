@@ -7,7 +7,7 @@
     <title>Longtian Bao | CS Researcher & Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@700&amp;display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #2563eb;
@@ -532,12 +532,11 @@
                     <div class="social-links">
                         <a href="mailto:lobao@uchicago.edu" class="btn btn-primary">Contact Me</a>
                         <a href="https://github.com/LongtianBao" target="_blank" class="btn btn-outline">GitHub</a>
-                        <a href="https://scholar.google.com/citations?user=xX-1jwkAAAAJ&hl=en" target="_blank" class="btn btn-outline">Google Scholar</a>
+                        <a href="https://scholar.google.com/citations?user=xX-1jwkAAAAJ&amp;hl=en" target="_blank" class="btn btn-outline">Google Scholar</a>
                         <a href="cv.pdf" target="_blank" class="btn btn-outline">CV</a>
                     </div>
                 </div>
                 <div class="hero-image-container">
-                    <!-- Please save your image as images/profile.jpg -->
                     <img src="images/image.png" alt="Longtian Bao" class="hero-image" onerror="this.style.display='none'">
                 </div>
             </div>
@@ -546,6 +545,7 @@
         <!-- Publications -->
         <section id="publications">
             <h2>Selected Publications</h2>
+            <p style="font-size: 0.85rem; color: var(--text-lighter); margin-top: -1rem; margin-bottom: 1.5rem;">* denotes equal contribution</p>
 
             <div class="publication-item">
                 <div class="pub-title">Question Begets Question: Self-Evolving Curriculum for Reinforcement Fine-Tuning on Competition Mathematics</div>
@@ -564,7 +564,7 @@
 
             <div class="publication-item">
                 <div class="pub-title">DeepImagine: Learning Biomedical Reasoning via Successive Counterfactual Imagining</div>
-                <div class="pub-authors">Youze Zheng, Jianyou Wang, Yuhan Chen, Matthew Feng, <strong>Longtian Bao</strong>, Hanyuan Zhang, Maxim Khan, Aditya K. Sehgal, Christopher D. Rosin, Umber Dube, Ramamohan Paturi</div>
+                <div class="pub-authors">Youze Zheng*, Jianyou Wang*, Yuhan Chen, Matthew Feng, <strong>Longtian Bao</strong>, Hanyuan Zhang, Maxim Khan, Aditya K. Sehgal, Christopher D. Rosin, Umber Dube, Ramamohan Paturi</div>
                 <div class="pub-venue">arXiv preprint, 2026</div>
                 <div class="pub-links">
                     <a href="https://arxiv.org/abs/2604.23054" target="_blank">Paper</a>
@@ -573,7 +573,7 @@
 
             <div class="publication-item">
                 <div class="pub-title">CT Open: An Open-Access, Uncontaminated, Live Platform for the Open Challenge of Clinical Trial Outcome Prediction</div>
-                <div class="pub-authors">Jianyou Wang, Youze Zheng, <strong>Longtian Bao</strong>, Hanyuan Zhang, Qirui Zheng, Yuhan Chen, Yang Zhang, Matthew Feng, Maxim Khan, Aditya K. Sehgal, Christopher D. Rosin, Ramamohan Paturi, Umber Dube, Leon Bergen</div>
+                <div class="pub-authors">Jianyou Wang*, Youze Zheng*, <strong>Longtian Bao</strong>, Hanyuan Zhang, Qirui Zheng, Yuhan Chen, Yang Zhang, Matthew Feng, Maxim Khan, Aditya K. Sehgal, Christopher D. Rosin, Ramamohan Paturi, Umber Dube, Leon Bergen</div>
                 <div class="pub-venue">arXiv preprint, 2026</div>
                 <div class="pub-links">
                     <a href="https://arxiv.org/abs/2604.16742" target="_blank">Paper</a>
@@ -582,7 +582,7 @@
 
             <div class="publication-item">
                 <div class="pub-title">Single-Pass Document Scanning for Question Answering</div>
-                <div class="pub-authors">Weili Cao*, Jianyou Wang, Youze Zheng*, <strong>Longtian Bao*</strong>, Qirui Zheng, Taylor Berg-Kirkpatrick, Ramamohan Paturi, Leon Bergen</div>
+                <div class="pub-authors">Weili Cao*, Jianyou Wang*, Youze Zheng*, <strong>Longtian Bao*</strong>, Qirui Zheng, Taylor Berg-Kirkpatrick, Ramamohan Paturi, Leon Bergen</div>
                 <div class="pub-venue">Conference on Language Modeling (COLM), 2025 <span class="tag tag-highlight">Oral Spotlight, Top 2%</span></div>
                 <div class="pub-links">
                     <a href="https://arxiv.org/abs/2504.03101" target="_blank">Paper</a>
@@ -605,7 +605,29 @@
         <section id="experience">
             <h2>Experience</h2>
             
-            <!-- Research -->
+            <!-- Research: UChicago -->
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="exp-header">
+                    <div>
+                        <div class="exp-role">Ph.D. Student</div>
+                        <div class="exp-org">Department of Computer Science, University of Chicago</div>
+                        <div style="font-size: 0.9rem; color: var(--text-light); margin-top: 0.25rem;">
+                            Reinforcement fine-tuning for LLM reasoning; multi-agent LLM serving
+                        </div>
+                    </div>
+                    <div class="exp-date">Mar 2026 – Present</div>
+                </div>
+                <div class="exp-details">
+                    <ul>
+                        <li>Designed Question-begets-Question (QbQ), a scalable data-generation procedure in which a teacher model transforms competition-math problems into diverse variants probing the same skills, enabling reinforcement fine-tuning without oracle reasoning traces.</li>
+                        <li>Proposed a self-evolving curriculum that re-seeds QbQ each round from problems the current checkpoint can mostly solve, breaking the static-training ceiling and lifting Qwen2.5-Math-7B from 5.6% to 16.5% pass@1 on AIME with no saturation after 20 rounds.</li>
+                        <li>Introduced a unified typed-graph representation of multi-agent LLM systems and serving optimizations achieving up to a 5× speedup while using 54–89% fewer tokens on real GPUs, showing that decode dominance makes phase-aware algorithm–system co-design essential.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Research: UCSD -->
             <div class="timeline-item">
                 <div class="timeline-marker"></div>
                 <div class="exp-header">
@@ -616,16 +638,15 @@
                             Advisors: Prof. Leon Bergen and Prof. Ramamohan Paturi
                         </div>
                     </div>
-                    <div class="exp-date">Apr 2024 – Present</div>
+                    <div class="exp-date">Apr 2024 – Mar 2026</div>
                 </div>
                 <div class="exp-details">
                     <ul>
-                        <li>Re-architected a Mamba-2 State-Space Model (SSM) by replacing its language modeling head with a classification head, creating a subquadratic model that preserves global context for efficient sentence retrieval in documents as long as 256k tokens.</li>
-                        <li>Designed and implemented a novel link-based synthetic data generation pipeline where an LLM identifies and leverages natural, long-range dependencies within documents to create coherent training examples for long-context question answering.</li>
-                        <li>Developed an LLM-assisted annotation-validation pipeline to construct a new information retrieval benchmark from 41 existing QA datasets, enabling a fine-grained evaluation of model performance in retrieving relevant sentences from long documents.</li>
-                        <li>Developed the RoBBR benchmark, a new resource for assessing risk-of-bias in biomedical research, derived from expert judgments on over 500 scientific studies to evaluate LLM capabilities in analyzing methodological strength.</li>
-                        <li>Designed two novel subtasks—Support Sentence Retrieval (SSR) and Support Judgment Selection (SJS)—to disentangle and independently measure the information retrieval and reasoning abilities of language models in the complex domain of bias assessment.</li>
-                        <li>Engineered an automatic, human-validated annotation pipeline using GPT-4 to create the ground truth for the retrieval task by decomposing expert judgments into fine-grained "aspects" and mapping them precisely to source sentences in biomedical papers.</li>
+                        <li>Co-developed CT Open, an open-access, uncontaminated, live platform for the open challenge of clinical trial outcome prediction, enabling rigorous evaluation of LLMs on prospective post-training-cutoff trials.</li>
+                        <li>Contributed to DeepImagine, which teaches LLMs biomedical reasoning by training them to infer how observed clinical-trial results change under controlled perturbations, combining supervised fine-tuning on strict counterfactual pairs with RL from verifiable rewards.</li>
+                        <li>Re-architected a Mamba-2 State-Space Model with a classification head, creating a subquadratic model that preserves global context for efficient sentence retrieval in documents up to 256k tokens, with a link-based synthetic data pipeline for long-context QA training.</li>
+                        <li>Constructed a fine-grained sentence-retrieval benchmark from 41 existing QA datasets via an LLM-assisted annotation-validation pipeline.</li>
+                        <li>Developed the RoBBR benchmark for risk-of-bias assessment in biomedical research from expert judgments on 500+ studies, with subtasks that disentangle the retrieval and reasoning abilities of language models.</li>
                     </ul>
                 </div>
             </div>
@@ -635,16 +656,17 @@
                 <div class="timeline-marker"></div>
                 <div class="exp-header">
                     <div>
-                        <div class="exp-role">Teaching Assistant</div>
+                        <div class="exp-role">Instructional Apprentice (Tutor)</div>
                         <div class="exp-org">UC San Diego</div>
                     </div>
                     <div class="exp-date">2021 – 2024</div>
                 </div>
                 <div class="exp-details">
                     <ul>
-                        <li><strong>Data Structures (CSE 12):</strong> Winter 23, Winter 24</li>
+                        <li><strong>Data Structures (CSE 12):</strong> Spring 21, Winter 23, Winter 24</li>
                         <li><strong>Accel. Intro to Programming (CSE 11):</strong> Winter 22, Fall 22, Spring 23</li>
                         <li><strong>Computer Organization (CSE 30):</strong> Fall 23</li>
+                        <li><strong>Software Tools &amp; Techniques Lab (CSE 15L):</strong> Spring 21</li>
                     </ul>
                 </div>
             </div>
@@ -657,7 +679,7 @@
                 <div class="project-card">
                     <div class="project-header">
                         <h3>UCSD Autograder</h3>
-                        <span class="exp-date">2023-2024</span>
+                        <span class="exp-date">2023–2024</span>
                     </div>
                     <div class="project-desc">
                         Engineered a full-stack educational platform used by over 1,000 students. Developed containerized autograders and real-time ticket queues for office hours.
@@ -675,7 +697,7 @@
                         <span class="exp-date">Winter 2024</span>
                     </div>
                     <div class="project-desc">
-                        Built a 1/10 scale autonomous vehicle with Jetson Nano, LIDAR, and OAK-D. Trained behavioral cloning models using TensorFlow to navigate racetracks.
+                        Built a 1/10-scale autonomous vehicle with Jetson Nano, LIDAR, and OAK-D. Trained behavioral cloning models using TensorFlow to navigate racetracks.
                     </div>
                     <div class="project-tech">
                         <span class="tech-pill">Robotics</span>

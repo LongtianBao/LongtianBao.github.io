@@ -1,6 +1,6 @@
 \documentclass[11pt]{article}
 
-\usepackage[margin=0.75in]{geometry}
+\usepackage[margin=0.65in]{geometry}
 \usepackage[hidelinks]{hyperref}
 \usepackage{enumitem}
 \usepackage{titlesec}
@@ -11,7 +11,8 @@
 \emergencystretch=1.5em
 
 \titleformat{\section}{\large\bfseries\scshape}{}{0em}{}[\titlerule]
-\titlespacing{\section}{0pt}{10pt}{6pt}
+\titlespacing{\section}{0pt}{8pt}{4pt}
+\setlength{\parskip}{3pt}
 
 \newcommand{\entry}[2]{\noindent\textbf{#1}\hfill #2\par}
 \newcommand{\subentry}[2]{\noindent #1\hfill #2\par}
@@ -35,7 +36,7 @@
 \section{Publications}
 {\small * denotes equal contribution.}
 
-\begin{enumerate}[label={[\arabic*]}, leftmargin=2.2em, itemsep=4pt]
+\begin{enumerate}[label={[\arabic*]}, leftmargin=2.2em, itemsep=2pt, topsep=2pt]
     \item \textbf{Longtian Bao}*, Jianyou Wang*, Yang Zhang*, Youze Zheng*, Ramamohan Paturi.
     ``Question Begets Question: Self-Evolving Curriculum for Reinforcement Fine-Tuning on Competition Mathematics.''
     \textit{arXiv preprint arXiv:2608.01522}, 2026.
@@ -45,17 +46,17 @@
     ``Multi-Agent LLM Serving Is a Full-Stack Problem: A Small Step Towards Algorithm--System Co-Design.''
     \textit{Under review}, 2026.
 
-    \item Youze Zheng, Jianyou Wang, Yuhan Chen, Matthew Feng, \textbf{Longtian Bao}, Hanyuan Zhang, Maxim Khan, Aditya K. Sehgal, Christopher D. Rosin, Umber Dube, Ramamohan Paturi.
+    \item Youze Zheng*, Jianyou Wang*, Yuhan Chen, Matthew Feng, \textbf{Longtian Bao}, Hanyuan Zhang, Maxim Khan, Aditya K. Sehgal, Christopher D. Rosin, Umber Dube, Ramamohan Paturi.
     ``DeepImagine: Learning Biomedical Reasoning via Successive Counterfactual Imagining.''
     \textit{arXiv preprint arXiv:2604.23054}, 2026.
     \href{https://arxiv.org/abs/2604.23054}{[Paper]}
 
-    \item Jianyou Wang, Youze Zheng, \textbf{Longtian Bao}, Hanyuan Zhang, Qirui Zheng, Yuhan Chen, Yang Zhang, Matthew Feng, Maxim Khan, Aditya K. Sehgal, Christopher D. Rosin, Ramamohan Paturi, Umber Dube, Leon Bergen.
+    \item Jianyou Wang*, Youze Zheng*, \textbf{Longtian Bao}, Hanyuan Zhang, Qirui Zheng, Yuhan Chen, Yang Zhang, Matthew Feng, Maxim Khan, Aditya K. Sehgal, Christopher D. Rosin, Ramamohan Paturi, Umber Dube, Leon Bergen.
     ``CT Open: An Open-Access, Uncontaminated, Live Platform for the Open Challenge of Clinical Trial Outcome Prediction.''
     \textit{arXiv preprint arXiv:2604.16742}, 2026.
     \href{https://arxiv.org/abs/2604.16742}{[Paper]}
 
-    \item Weili Cao*, Jianyou Wang, Youze Zheng*, \textbf{Longtian Bao}*, Qirui Zheng, Taylor Berg-Kirkpatrick, Ramamohan Paturi, Leon Bergen.
+    \item Weili Cao*, Jianyou Wang*, Youze Zheng*, \textbf{Longtian Bao}*, Qirui Zheng, Taylor Berg-Kirkpatrick, Ramamohan Paturi, Leon Bergen.
     ``Single-Pass Document Scanning for Question Answering.''
     \textit{Conference on Language Modeling (COLM)}, 2025. \textbf{(Oral Spotlight, Top 2\%)}.
     \href{https://arxiv.org/abs/2504.03101}{[Paper]}
@@ -69,53 +70,37 @@
 \end{enumerate}
 
 \section{Research Experience}
-\entry{Research Assistant --- Laboratory for Emerging Intelligence, UC San Diego}{La Jolla, CA}
-\subentry{Advisors: Prof. Leon Bergen and Prof. Ramamohan Paturi}{Apr. 2024 -- Present}
+\entry{Ph.D. Student --- Department of Computer Science, University of Chicago}{Chicago, IL}
+\subentry{Reinforcement fine-tuning for LLM reasoning; multi-agent LLM serving}{Mar. 2026 -- Present}
 \begin{itemize}[leftmargin=1.2em, itemsep=2pt, topsep=4pt]
-    \item Re-architected a Mamba-2 State-Space Model (SSM) by replacing its language modeling head with a classification head, creating a subquadratic model that preserves global context for efficient sentence retrieval in documents as long as 256k tokens [5].
-    \item Designed and implemented a novel link-based synthetic data generation pipeline where an LLM identifies and leverages natural, long-range dependencies within documents to create coherent training examples for long-context question answering [5].
-    \item Developed an LLM-assisted annotation-validation pipeline to construct a new information retrieval benchmark from 41 existing QA datasets, enabling a fine-grained evaluation of model performance in retrieving relevant sentences from long documents [5].
-    \item Developed the RoBBR benchmark, a new resource for assessing risk-of-bias in biomedical research, derived from expert judgments on over 500 scientific studies to evaluate LLM capabilities in analyzing methodological strength [6].
-    \item Designed two novel subtasks---Support Sentence Retrieval (SSR) and Support Judgment Selection (SJS)---to disentangle and independently measure the information retrieval and reasoning abilities of language models in the complex domain of bias assessment [6].
-    \item Engineered an automatic, human-validated annotation pipeline using GPT-4 to create the ground truth for the retrieval task by decomposing expert judgments into fine-grained ``aspects'' and mapping them precisely to source sentences in biomedical papers [6].
+    \item Designed Question-begets-Question (QbQ), a scalable data-generation procedure in which a teacher model transforms competition-math problems into diverse variants probing the same underlying skills, enabling reinforcement fine-tuning from problem statements and final answers alone --- no oracle reasoning traces [1].
+    \item Proposed a self-evolving curriculum that re-seeds QbQ each round from problems the current checkpoint can mostly solve; under an identical data budget this breaks the static-training ceiling, lifting Qwen2.5-Math-7B from 5.6\% to 16.5\% pass@1 on AIME with no saturation after 20 rounds [1].
+    \item Introduced a unified typed-graph representation that casts multi-agent LLM systems as analyzable serving workloads, and developed static runtime patterns and dynamic accuracy--efficiency strategies achieving up to a 5$\times$ speedup while using 54--89\% fewer tokens on real GPUs --- while showing that decode dominance means prefill-only wins do not survive end to end, making phase-aware algorithm--system co-design essential [2].
+\end{itemize}
+
+\entry{Research Assistant --- Laboratory for Emerging Intelligence, UC San Diego}{La Jolla, CA}
+\subentry{Advisors: Prof.\ Leon Bergen and Prof.\ Ramamohan Paturi}{Apr. 2024 -- Mar. 2026}
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt, topsep=4pt]
+    \item Co-developed CT Open, an open-access, uncontaminated, live platform for the open challenge of clinical trial outcome prediction, enabling rigorous evaluation of LLMs on prospective (post-training-cutoff) trials [4].
+    \item Contributed to DeepImagine, which teaches LLMs biomedical reasoning by training them to infer how observed clinical-trial results change under controlled perturbations (dosage, outcome measures, study arms), combining supervised fine-tuning on strict counterfactual pairs with RL from verifiable rewards [3].
+    \item Re-architected a Mamba-2 State-Space Model with a classification head, creating a subquadratic model that preserves global context for efficient sentence retrieval in documents up to 256k tokens, and designed a link-based synthetic data pipeline exploiting natural long-range dependencies for long-context QA training [5].
+    \item Constructed a fine-grained sentence-retrieval benchmark from 41 existing QA datasets via an LLM-assisted annotation-validation pipeline [5].
+    \item Developed the RoBBR benchmark for risk-of-bias assessment in biomedical research from expert judgments on 500+ studies, designing subtasks that disentangle the retrieval and reasoning abilities of language models and building a human-validated GPT-4 annotation pipeline for ground truth [6].
 \end{itemize}
 
 \section{Teaching Experience}
-\entry{Instructional Apprentice (Tutor) --- UC San Diego}{La Jolla, CA}
-\subentry{Selected Quarters:}{Spring 2021 -- Winter 2024}
-\begin{itemize}[leftmargin=1.2em, itemsep=2pt, topsep=4pt]
-    \item \textbf{CSE 12 - Data Structures:} Spring 2021, Winter 2023, Winter 2024
-    \item \textbf{CSE 11 - Accelerated Introduction to Programming:} Winter 2022, Fall 2022, Spring 2023
-    \item \textbf{CSE 30 - Computer Organization:} Fall 2023
-    \item \textbf{CSE 15L - Software Tools \& Techniques Lab:} Spring 2021
-\end{itemize}
+\entry{Instructional Apprentice (Tutor) --- UC San Diego}{Spring 2021 -- Winter 2024}
+CSE 12 (Data Structures), CSE 11 (Accelerated Intro to Programming), CSE 30 (Computer Organization), CSE 15L (Software Tools \& Techniques), across eight selected quarters.
 
 \section{Projects}
-\entry{UCSD Autograder Platform}{Fall 2023 -- Spring 2024}
-\begin{itemize}[leftmargin=1.2em, itemsep=2pt, topsep=4pt]
-    \item Engineered and maintained a full-stack educational platform used by over 1,000 students across multiple departments, managing a database with millions of rows of student data.
-    \item Developed key features including a containerized autograder for homework submissions and a real-time, ticket-based queue system for teaching assistant office hours.
-\end{itemize}
-
-\entry{Autonomous AI Racing Car}{Winter 2024}
-\begin{itemize}[leftmargin=1.2em, itemsep=2pt, topsep=4pt]
-    \item Built and configured a 1/10 scale autonomous vehicle, integrating a Jetson Nano single-board computer with a VESC, LIDAR, and OAK-D AI camera.
-    \item Utilized the DonkeyCar framework and TensorFlow to train a behavioral cloning model, enabling the car to autonomously navigate a racetrack by collecting and learning from human driving data.
-\end{itemize}
-
-\entry{DaCe Framework Reproducibility --- Student Cluster Competition}{Fall 2022}
-\begin{itemize}[leftmargin=1.2em, itemsep=2pt, topsep=4pt]
-    \item Evaluated the reproducibility of the DaCe high-performance Python framework on NPBench benchmarks using a novel AMD-based hardware configuration.
-    \item Ported and debugged several NumPy benchmarks to the DaCe framework, analyzing performance speedups and identifying portability limitations.
-\end{itemize}
+\entry{UCSD Autograder Platform}{2023 -- 2024}
+Engineered and maintained a full-stack educational platform serving 1,000+ students across multiple departments, with a containerized autograder, a real-time ticket-based office-hours queue, and a database holding millions of rows of student data.
 
 \section{Skills}
 \textbf{Programming:} Python (advanced), C/C++, Java, JavaScript/TypeScript, Bash\\
-\textbf{ML \& NLP/IR:} PyTorch, TensorFlow, Hugging Face Transformers, State-Space Models (Mamba-2), reinforcement fine-tuning (GRPO), long-context QA \& sentence retrieval, OpenCV\\
-\textbf{Backend \& Data:} Flask/FastAPI, PostgreSQL, REST APIs, real-time queue systems, basic PySpark\\
+\textbf{ML \& NLP/IR:} PyTorch, Hugging Face Transformers, reinforcement fine-tuning (GRPO), State-Space Models (Mamba-2), long-context QA \& sentence retrieval, LLM evaluation \& benchmarking\\
 \textbf{Systems \& DevOps:} Docker, Linux/SSH, Git/GitHub, AWS (EC2/S3), Distributed Training, Weights \& Biases\\
-\textbf{Web/Frontend:} React\\
-\textbf{Robotics/Edge:} NVIDIA Jetson, LIDAR, OAK-D, VESC, DonkeyCar framework\\
+\textbf{Backend \& Data:} Flask/FastAPI, PostgreSQL, REST APIs, React\\
 \textbf{LLM Tooling:} OpenAI/Anthropic/Google APIs
 
 \end{document}
